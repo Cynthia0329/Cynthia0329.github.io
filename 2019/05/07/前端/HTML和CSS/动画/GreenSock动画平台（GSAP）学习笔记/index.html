@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"right","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="🐰…">
+<meta name="keywords" content="GSAP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GreenSock动画平台（GSAP）学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/05/07/前端/HTML和CSS/动画/GreenSock动画平台（GSAP）学习笔记/index.html">
+<meta property="og:site_name" content="Cynthia&#39;s Blog">
+<meta property="og:description" content="🐰…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507110900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507110933.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507111048.png">
+<meta property="og:updated_time" content="2019-09-24T08:22:21.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GreenSock动画平台（GSAP）学习笔记">
+<meta name="twitter:description" content="🐰…">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507110900.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/07/前端/HTML和CSS/动画/GreenSock动画平台（GSAP）学习笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GreenSock动画平台（GSAP）学习笔记 | Cynthia's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<!-- 引入jQuery -->
+<script type="text/javascript" src="/lib/jquery/index.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 引入自定义js文件，实现分类折叠效果 -->
+<script type="text/javascript" src="/js/src/category.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cynthia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">鱼蛋的博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block index">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/前端/HTML和CSS/动画/GreenSock动画平台（GSAP）学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cynthia">
+      <meta itemprop="description" content="一个不会画画的设计不是一个好程序猿">
+      <meta itemprop="image" content="/images/user-icon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cynthia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GreenSock动画平台（GSAP）学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-07 10:17:38" itemprop="dateCreated datePublished" datetime="2019-05-07T10:17:38+08:00">2019-05-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-24 16:22:21" itemprop="dateModified" datetime="2019-09-24T16:22:21+08:00">2019-09-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/HTML和CSS/" itemprop="url" rel="index"><span itemprop="name">HTML和CSS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/HTML和CSS/动画/" itemprop="url" rel="index"><span itemprop="name">动画</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>🐰<br>…<br><a id="more"></a></p>
+<h2 id="优秀文章"><a href="#优秀文章" class="headerlink" title="优秀文章"></a>优秀文章</h2><blockquote>
+<p>符号表示目前是否看完</p>
+</blockquote>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000005366176" target="_blank" rel="noopener">GSAP - 专业的 Web 动画库</a>   ✔</li>
+<li><a href="https://www.cnblogs.com/vaney/p/4502480.html" target="_blank" rel="noopener">TweenMax 中文使用说明</a>   ✖</li>
+</ul>
+<h2 id="GreenSock组成简介"><a href="#GreenSock组成简介" class="headerlink" title="GreenSock组成简介"></a>GreenSock组成简介</h2><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>在<a href="https://greensock.com/" target="_blank" rel="noopener">官网</a>选择Download zip就可以拿到GSAP源码，解压后可以看到有这些文件：</p>
+<p><img src="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507110900.png" alt></p>
+<p>这里的 <code>TweenLite.js</code>、<code>TweenMax.js</code>、<code>TimelineLite.js</code> 和 <code>TimelineMax.js</code> 4个文件就是GSAP的一般引用库文件</p>
+<p><strong>这4个文件分别包含了什么东西呢？</strong></p>
+<ul>
+<li><code>TweenLite</code> ：是GSAP的<strong>主体核心</strong>，它用于创建基本动画，是其他各类模块的基础。一般都会搭配 <code>plugins/CSSPlugin</code> 以实现DOM元素的动画（也就是我们最熟悉的动画了）。</li>
+<li><code>TimelineLite</code> ：是一个叫做<strong>时间轴</strong>的动画容器，它用于<strong>对多个动画进行有序的组织与控制</strong>。</li>
+<li><code>TimeLineMax</code> ：是 <code>TimelineLite</code> 的升级版，在 <code>TimelineLite</code> 的基础之上，可以有更高级的组织与控制。</li>
+<li><code>TweenMax</code> ：是<strong>GSAP集合包</strong>，除前面3个之外，还包括 <code>plugins</code> 里的常用插件以及 <code>easing</code> 里的缓动函数补充。</li>
+</ul>
+<p>⭐ <a href="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507104937.png" target="_blank" rel="noopener">一张图说明GSAP动画平台四个插件的不同功能</a></p>
+<h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><p>不过，这几个文件还有一些重叠和包含的关系，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507110933.png" alt></p>
+<p>GSAP在Customize里是这样描述自己拥有的模块的：</p>
+<p><img src="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190507111048.png" alt></p>
+<p>默认勾选的 <code>TweenLite</code> + <code>css plugin</code> 是最简单的应用组合</p>
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a><strong>使用建议</strong></h3><ul>
+<li>如果想要简单地引入GSAP的主体功能，使用 <code>TweenMax.js</code> 这一个文件即可（请看第一张图中反映出的这个文件的大小）。</li>
+<li>而如果要争取更小的库文件大小，应该使用 <code>TweenLite.js</code>（必需）+ 其他文件的组合。</li>
+</ul>
+<h3 id="学习提示"><a href="#学习提示" class="headerlink" title="学习提示"></a>学习提示</h3><p><code>TweenMax</code> 是 <code>TweenLite</code> 的升级版，拥有其全部特性，只是增加了一些额外的高级控制。<br>它们的语法完全一致，使用时用全局搜索把所有 <code>TweenLite</code> 替换成 <code>TweenMax</code> ，不会有任何影响。<br><code>TimelineMax</code> 和 <code>TimelineLite</code> 的关系也是如此。</p>
+<p>（但是将Max替换成原本的要注意是否是Max中特有的语法）</p>
+<p><strong>所以：</strong> 我们直接学习 <code>TweenMax</code> 和 <code>TimelineMAX</code> 就可以了</p>
+<p>后面的实际运用篇我们只选择了 <code>TimelineMax</code> ，但是第一次学习使用，建议还是先大概学一下 <code>TweenMax</code> 再学习 <code>TimelineMax</code> </p>
+<p><strong>原因：</strong>因为 <code>TweenLite</code> 是整个GSAP最基础的部分，先理解这一部分对于后面的学习也能快速上手，并且可以理解得更加充分</p>
+<h2 id="GSAP学习文档"><a href="#GSAP学习文档" class="headerlink" title="GSAP学习文档"></a>GSAP学习文档</h2><p>最好的学习方式就是去将官方的两篇文档大概过一遍，然后再实际上手练习</p>
+<ul>
+<li><a href="https://www.tweenmax.com.cn/api/tweenmax/" target="_blank" rel="noopener">TweenMax中文手册</a></li>
+<li><a href="https://www.tweenmax.com.cn/api/timelinemax/" target="_blank" rel="noopener">TimelineMax中文手册</a></li>
+</ul>
+<p>我在第一遍学习阅读的时候，对相关API进行了总结</p>
+
+<h2 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h2><h3 id="为什么选择TimelineLite？"><a href="#为什么选择TimelineLite？" class="headerlink" title="为什么选择TimelineLite？"></a>为什么选择TimelineLite？</h3><p>好像 <code>TweenLite</code> + <code>css plugin</code> 就已经足够用了，这个Timeline系列是做什么的呢？</p>
+<p>想象你是一个动画的导演，你要按剧本安排演员在一个CUT里依次上场和退场。在 <code>TweenLite</code> 里，我们只有一个演员（<code>#ball1</code>），但现在，我们要拍一个有20+演员的动画大片，要怎么办呢？</p>
+<p>你也许曾用css3的 <code>animation</code> 做过类似的事情，做法是，当转换到一个场景（CUT）后，为场景里的所有演员依次设定适当的 <code>delay</code> 。只要 <code>delay</code> 计划好，看起来就是漂亮精彩的大片。</p>
+<p>不过，这可没有那么简单，假如你已经安排好了20位演员的上场时间，现在改了下剧本，来了第21位演员要在最开始上场，你会发现你可能要依次调整在它之后的所有演员的<code>delay</code>…</p>
+<blockquote>
+<p>GSAP的 <code>TweenLite</code> 也会有同样的问题，因此，我们需要有一个工具来<strong>统一管理多个元素的多个动</strong>画</p>
+<p>如果你做过视频编辑，你一定很熟悉“时间轴”这个概念。简单来说，每一个元素的单次动画都是一段素材，我们需要把它们分别放置到同一个时间轴的适当位置，才能集合在一起得到有序的动画大片。</p>
+<p>这就是<code>TimelineLite</code>。</p>
+</blockquote>
+<p>然后通过上面两者官方API文档的总结我们可以发现，几乎所有 <code>TweenLite</code> 常用的API方法都可以在 <code>TimelineLite</code> 中找到。</p>
+<p>而且明显的如果两者结合使用还不如只用 <code>TweenlineLite</code> 更加简便。</p>
+<p>如下面的例子：</p>
+<p>添加一个<code>TweenLite.to()</code>动画到时间轴，相当于<code>add(TweenLite.to(...))</code>，以下两行产生相同的结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两者结合使用</span></span><br><span class="line">myTimeline.add( TweenLite.to(element, <span class="number">1</span>, &#123;<span class="attr">left</span>:<span class="number">100</span>, <span class="attr">opacity</span>:<span class="number">0.5</span>&#125;) );</span><br><span class="line"></span><br><span class="line"><span class="comment">// 只使用TweenlineLite</span></span><br><span class="line">myTimeline.to(element, <span class="number">1</span>, &#123;<span class="attr">left</span>:<span class="number">100</span>, <span class="attr">opacity</span>:<span class="number">0.5</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>所以，目前我的实际运用中主要只使用了 <code>TimelineLite</code> 来实现动画效果（暂时我的使用过程中还未发现有什么单独用TimelineLite不行，而结合TweenLite可以的例子。如果有会再次更新进行相关的说明）</p>
+<h3 id="animate和TweenlineMax的区别？"><a href="#animate和TweenlineMax的区别？" class="headerlink" title="animate和TweenlineMax的区别？"></a>animate和TweenlineMax的区别？</h3><p>从上一节的分析我们就可以看得出来，这两者的区别除了一个是js一个是css之外和上面 <code>TweenLite</code> 和<code>TimelineLite</code> 的区别很像，主要是后者引入了时间轴的概念</p>
+<p>下面我们来看分别用两种方法实现的例子</p>
+<p>多个元素相同的动画：多个文字实现向下渐隐出现的效果</p>
+<blockquote>
+<p>tips：如果👇的示例没有出现，请多刷新几次或者直接点击标题链接进行查看（右上角可以查看源码）</p>
+</blockquote>
+<h4 id="animate的实现方式"><a href="#animate的实现方式" class="headerlink" title="animate的实现方式"></a><a href="http://jsrun.net/SYyKp" target="_blank" rel="noopener">animate的实现方式</a></h4><script async src="//jsrun.net/SYyKp/embed/all/dark/"></script>
+
+<p>从上面示例可以看出，主要只添加了HTML部分的代码</p>
+<h4 id="TweenlineMax中的实现方式"><a href="#TweenlineMax中的实现方式" class="headerlink" title="TweenlineMax中的实现方式"></a><a href="http://jsrun.net/LiyKp" target="_blank" rel="noopener">TweenlineMax中的实现方式</a></h4><script async src="//jsrun.net/LiyKp/embed/all/dark/"></script>
+
+<p>从上面示例可以看出，主要只添加了JS部分的代码</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>从上面代码我们可以看出</p>
+<ul>
+<li>一个只添加了HTML代码的类名，一个只添加了js的方法</li>
+<li>当只对单个（同时或者不考虑连续时间）不同的元素添加动画时，用<strong>animate</strong>比较方便</li>
+<li>当对多个相同的元素添加动画时，用<strong>GSAP</strong>比较方便（可以通过js一次性获得所有相同元素的dom，然后一次性添加动画）</li>
+<li>当对多个元素（无论是否相同），需要引入时间轴（或者时间比较复杂时），使用<strong>GSAP</strong><ul>
+<li>animate只能通过延迟来把控时间，如果时间元素过多，不好把控</li>
+<li>而且容易出现“如果需要在开头新添一个元素的动画，可能需要修改全部元素的延迟时间”这种麻烦的事情</li>
+</ul>
+</li>
+</ul>
+<h4 id="两种相互转换"><a href="#两种相互转换" class="headerlink" title="两种相互转换"></a>两种相互转换</h4><p>如果你想使用animate中的动画效果，可以分析animate的源码，找到相应动画的 <code>keyframe</code> 即可以将其转换成GSAP动画的模式（上面的实例就是根据这个方法实现的）</p>
+<p>因为本质上两者都是用css3实现的动画，原理是相同的</p>
+<h3 id="项目顺序"><a href="#项目顺序" class="headerlink" title="项目顺序"></a>项目顺序</h3><p>在实际运用中，一定要切记一点！</p>
+<p>我们最好是先把整个页面的最终排版布局样式都完成了再来进行相关的动画。千万不能一边布局一边进行动画，这样的话，如果其中某步的布局有问题需要调整，可能会影响整个动画结果。</p>
+<p>下面是我建议的一个流程顺序：</p>
+<ul>
+<li>对页面进行排版布局（包括细节的css样式）</li>
+<li>确定整个页面时间轴的动画，梳理出一个大概顺序</li>
+<li>通过以上顺序，（最好）先确定好一些必须要添加标记的地方，以及该标记先后的动画<ul>
+<li><a href="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190513163637.png" target="_blank" rel="noopener">大概有这样一幅图在脑海中或者草稿先画出来</a></li>
+</ul>
+</li>
+<li>最后再书写具体的动画</li>
+</ul>
+<h3 id="创建dom元素"><a href="#创建dom元素" class="headerlink" title="创建dom元素"></a>创建dom元素</h3><p>从上面建议的项目顺序第一步，如果dom元素相对较少，就不需要采取下面的方式。</p>
+<p>如果页面拥有特别多的dom元素（比如页面上有二三十个小球同时运动），那么这种建议使用js来进行创建dom</p>
+<p>因为使用GSAP一般会默认引入jQuery，所以请善用jQuery来创建大量的dom元素！这样可以节省很多手写dom标签的时间。</p>
+<p>并且对后面直接操控dom元素来添加动画也更加利于理解</p>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个就不必解释了吧？创建动画的第一步</span></span><br><span class="line"><span class="keyword">var</span> tl = <span class="keyword">new</span> TimelineMax();		</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适用于样式需要变化时</span></span><br><span class="line">tl.fromTo(元素, 时长, &#123;初始样式&#125;, &#123;最终样式&#125;, <span class="string">"标记名字或者相对时间（不填默认上个动画结尾处）"</span>)	</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用于简单的动画（最终还是回归初始样式）模仿animate的样式很多可以用这个方法</span></span><br><span class="line">tl.from(元素, 时长, &#123;初始样式&#125;)	</span><br><span class="line"></span><br><span class="line">.to(<span class="string">".gold"</span>, <span class="number">0.5</span>, &#123;<span class="attr">scale</span>: <span class="number">0.7</span>&#125;)</span><br><span class="line">.addLabel(<span class="string">"label1"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="常用初始设置"><a href="#常用初始设置" class="headerlink" title="常用初始设置"></a>常用初始设置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    repeat: <span class="literal">true</span>,	<span class="comment">// 动画在第一次完成后应重复的次数</span></span><br><span class="line">    yoyo: <span class="literal">true</span>		<span class="comment">// 如果设置yoyo为true，那么重复的动画将往返进行。默认为false</span></span><br><span class="line">    delay: 时长	   <span class="comment">// 时间轴动画开始之前的延迟秒数（或帧数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CSSPlugin常用"><a href="#CSSPlugin常用" class="headerlink" title="CSSPlugin常用"></a>CSSPlugin常用</h4><p><a href="https://www.tweenmax.com.cn/CSSPlugin/" target="_blank" rel="noopener">具体查看CSSPlugin文档</a></p>
+<ul>
+<li><code>width, height, margin, padding, top, left</code></li>
+<li><code>transforms (rotation, scaleX, scaleY, skewX, skewY, x, y, rotationX, and rotationY), colors, opacity</code> 等</li>
+<li><code>alpha, autoAlpha, transformOrigin,className</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tl.fromTo(元素, 时长, &#123;初始css样式&#125;)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    scale: <span class="number">1</span>,	<span class="comment">// 大小</span></span><br><span class="line">    opacity: <span class="number">0</span>,</span><br><span class="line">    top,bottom,left,right	<span class="comment">// 绝对定位</span></span><br><span class="line">    x,y		<span class="comment">// 相当于CSS3的translateX和translateY</span></span><br><span class="line">    xPercent: <span class="number">10</span>%,	<span class="comment">// 水平方向位移，以百分比为单位  </span></span><br><span class="line">    rotation: <span class="number">10</span>, <span class="comment">// 旋转，相当于CSS3的rotate，默认是角度deg</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h3><p><strong>.play()的补充说明</strong></p>
+<p>由于序列动画（staggerTo()等）分解成了一个个动画，因此不能简单的使用tween动画的play()控制。可将序列动画添加至时间轴，再使用timeline的play()方法来播放。</p>
+<h4 id="动画结束后清空style属性"><a href="#动画结束后清空style属性" class="headerlink" title="动画结束后清空style属性"></a>动画结束后清空style属性</h4><p>默认情况下，执行过动画的元素会留下<code>style</code>的内联样式，如果你担心这可能造成额外影响，可以设定<code>clearProps</code>参数清空它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TweenLite.to(<span class="string">"#ball1"</span>, <span class="number">2</span>, &#123;</span><br><span class="line">    x: <span class="number">200</span>,</span><br><span class="line">    clearProps: <span class="string">"all"</span>,</span><br><span class="line">    autoAlpha: <span class="number">0</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果只需要清理个别样式，单独写出来即可，如<code>clearProps: &quot;opacity&quot;</code>。</p>
+<h4 id="指定默认缓动"><a href="#指定默认缓动" class="headerlink" title="指定默认缓动"></a>指定默认缓动</h4><p>如果你大部分动画都使用同一种缓动函数，那么用<code>TweenLite.defaultEase</code>会很方便，比如修改为<code>Expo.easeOut</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TweenLite.defaultEase = Expo.easeOut;</span><br></pre></td></tr></table></figure>
+<h2 id="实例DEMO"><a href="#实例DEMO" class="headerlink" title="实例DEMO"></a>实例DEMO</h2><blockquote>
+<p>这节所有的demo都是用的实际运用里所说的模式</p>
+</blockquote>
+<p><br></p>
+<hr>
+<blockquote>
+<p>参考文章：</p>
+<p><a href="https://segmentfault.com/a/1190000005366176" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005366176</a></p>
+<p><a href="http://svgtrick.com/book/greensock/" target="_blank" rel="noopener">http://svgtrick.com/book/greensock/</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+      <div>
+      
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin:100px 0 10px 0;">
+              ------------- 本文到此结束啦 <i class="fa fa-paw"></i> 感谢您的阅读 ♪(＾∀＾●)ﾉ -------------
+        </div>
+    
+</div>
+
+      
+      </div>
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GSAP/" <i class="fa fa-tag"> GSAP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/06/前端/经验总结和规范/前端编程规范/" rel="next" title="前端编程规范">
+                <i class="fa fa-chevron-left"></i> 前端编程规范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/07/前端/HTML和CSS/动画/GSAP官方文档总结/" rel="prev" title="GSAP官方文档总结">
+                GSAP官方文档总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+                <img class="site-author-image" itemprop="image" src="/images/user-icon.jpeg" alt="Cynthia">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">Cynthia</p>
+              <div class="site-description motion-element" itemprop="description">一个不会画画的设计不是一个好程序猿</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Cynthia0329" title="GitHub &rarr; https://github.com/Cynthia0329" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Cynthia0329@outlook.com" title="E-Mail &rarr; Cynthia0329@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优秀文章"><span class="nav-text">优秀文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GreenSock组成简介"><span class="nav-text">GreenSock组成简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组成"><span class="nav-text">组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系"><span class="nav-text">关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用建议"><span class="nav-text">使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习提示"><span class="nav-text">学习提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GSAP学习文档"><span class="nav-text">GSAP学习文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际运用"><span class="nav-text">实际运用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么选择TimelineLite？"><span class="nav-text">为什么选择TimelineLite？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animate和TweenlineMax的区别？"><span class="nav-text">animate和TweenlineMax的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#animate的实现方式"><span class="nav-text">animate的实现方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TweenlineMax中的实现方式"><span class="nav-text">TweenlineMax中的实现方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种相互转换"><span class="nav-text">两种相互转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目顺序"><span class="nav-text">项目顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建dom元素"><span class="nav-text">创建dom元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的方法"><span class="nav-text">常用的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用初始设置"><span class="nav-text">常用初始设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CSSPlugin常用"><span class="nav-text">CSSPlugin常用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些注意点"><span class="nav-text">一些注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动画结束后清空style属性"><span class="nav-text">动画结束后清空style属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定默认缓动"><span class="nav-text">指定默认缓动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例DEMO"><span class="nav-text">实例DEMO</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cynthia</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"left","width":240,"height":300},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>

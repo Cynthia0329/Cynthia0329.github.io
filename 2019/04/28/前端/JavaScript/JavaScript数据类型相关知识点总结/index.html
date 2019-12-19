@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"right","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="所有相关的笔记汇总一起，以后方便查看复习">
+<meta name="keywords" content="编程，设计，动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript数据类型相关知识点总结">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/前端/JavaScript/JavaScript数据类型相关知识点总结/index.html">
+<meta property="og:site_name" content="Cynthia&#39;s Blog">
+<meta property="og:description" content="所有相关的笔记汇总一起，以后方便查看复习">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-24T08:23:13.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript数据类型相关知识点总结">
+<meta name="twitter:description" content="所有相关的笔记汇总一起，以后方便查看复习">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/04/28/前端/JavaScript/JavaScript数据类型相关知识点总结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript数据类型相关知识点总结 | Cynthia's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<!-- 引入jQuery -->
+<script type="text/javascript" src="/lib/jquery/index.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 引入自定义js文件，实现分类折叠效果 -->
+<script type="text/javascript" src="/js/src/category.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cynthia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">鱼蛋的博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block index">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/前端/JavaScript/JavaScript数据类型相关知识点总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cynthia">
+      <meta itemprop="description" content="一个不会画画的设计不是一个好程序猿">
+      <meta itemprop="image" content="/images/user-icon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cynthia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript数据类型相关知识点总结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-28 11:19:49" itemprop="dateCreated datePublished" datetime="2019-04-28T11:19:49+08:00">2019-04-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-24 16:23:13" itemprop="dateModified" datetime="2019-09-24T16:23:13+08:00">2019-09-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>所有相关的笔记汇总一起，以后方便查看复习</p>
+<a id="more"></a>
+<h2 id="JS-中的数据类型"><a href="#JS-中的数据类型" class="headerlink" title="JS 中的数据类型"></a>JS 中的数据类型</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a><strong>基本数据类型</strong></h3><blockquote>
+<p>5 种基本数据类型（Number, String, Boolean, Undefined, Null）<br>基本数据类型指的是简单的数据段</p>
+</blockquote>
+<p>1、<code>Number</code> 数值类型：整数和浮点数</p>
+<p>2、<code>String</code> 字符串类型：用引号括起来，可以双引号，也可以单引号</p>
+<p>3、<code>Boolean</code> 布尔类型：true和false</p>
+<p>4、<code>undefined</code> 类型：确定一个已经声明但是还没有赋值的变量</p>
+<p>5、<code>null</code> 类型：表明某个变量的值为空</p>
+<h3 id="复杂数据类型（引用数据类型）"><a href="#复杂数据类型（引用数据类型）" class="headerlink" title="复杂数据类型（引用数据类型）"></a><strong>复杂数据类型（引用数据类型）</strong></h3><blockquote>
+<p>3 种复杂（引用）数据类型（Object, Array, Function）<br>引用数据类型指的是有多个值构成的对象</p>
+</blockquote>
+<p>1、对象：<code>Object</code>              </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var car = &#123;name：；length：；price：；&#125;；</span><br></pre></td></tr></table></figure>
+<p>2、数组：<code>Array</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,4];</span><br></pre></td></tr></table></figure>
+<p>3、函数：<code>Function</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基本数据类型和引用数据类型的区别"><a href="#基本数据类型和引用数据类型的区别" class="headerlink" title="基本数据类型和引用数据类型的区别"></a>基本数据类型和引用数据类型的区别</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><blockquote>
+<p>基本数据类型指的是简单的数据段</p>
+<p>引用数据类型指的是有多个值构成的对象</p>
+</blockquote>
+<h4 id="与堆栈之间的联系"><a href="#与堆栈之间的联系" class="headerlink" title="与堆栈之间的联系"></a>与堆栈之间的联系</h4><p>JavaScript的数据类型分为两大种： </p>
+<ul>
+<li><strong>基本类型</strong>：Undefined、Null、Boolean、Number 和 String，这5中基本数据类型可以直接访问，他们是按照值进行分配的，存放在<strong>栈(stack)内存</strong>中的简单数据段，数据大小确定，内存空间大小可以分配。 </li>
+<li><strong>引用类型</strong>：即存放在<strong>堆(heap)内存</strong>中的对象，变量实际保存的是一个指针，这个指针指向另一个位置。</li>
+</ul>
+<h4 id="具体区别"><a href="#具体区别" class="headerlink" title="具体区别"></a>具体区别</h4><p><a href="https://www.cnblogs.com/cxying93/p/6106469.html" target="_blank" rel="noopener">https://www.cnblogs.com/cxying93/p/6106469.html</a></p>
+<h3 id="ES6-新增的数据类型"><a href="#ES6-新增的数据类型" class="headerlink" title="ES6 新增的数据类型"></a>ES6 新增的数据类型</h3><blockquote>
+<p>ES6 新增的数据类型：</p>
+<ul>
+<li>基本数据类型：Symbol</li>
+<li>复杂数据类型：Set（类Array），Map（类Object）</li>
+</ul>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>6种基本数据类型（Number, String, Boolean, Undefined, Null, Symbol）</p>
+<p>5种复杂数据类型（Object, Array, Function, Set, Map）</p>
+<p>一共11种数据类型</p>
+<h2 id="JS-数据类型判断"><a href="#JS-数据类型判断" class="headerlink" title="JS 数据类型判断"></a>JS 数据类型判断</h2><h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="noopener">MDN文档</a></p>
+<ul>
+<li><p>检测基本数据类型</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">3</span> <span class="comment">// "number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"abc"</span> <span class="comment">// "string"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span> <span class="comment">// "boolean"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// "undefined"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// "object"	此处显然是一个错误</span></span><br><span class="line"><span class="comment">// 还可以检测es6新引入的Symbol</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测复杂数据类型</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> &#123;&#125; <span class="comment">// "object"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; <span class="comment">// "function"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>除此之外 <code>Object</code> 下还有很多细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。如果用 <code>typeof</code> 去检测这些类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = []</span><br><span class="line"><span class="keyword">var</span> array2 = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> array1); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> array2); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> date); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> error); <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>总结：</strong></p>
+<ul>
+<li><p><code>typeof</code> 可以区分基本数据类型（null除外）；</p>
+</li>
+<li><p>可以区分复杂数据类型 Object 和 Function （Array不行）</p>
+</li>
+<li>不能区分 Object，即对象下的不同类型</li>
+</ul>
+</blockquote>
+<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/toString" target="_blank" rel="noopener">MDN文档</a></p>
+<p> <code>Object.protototype.toString</code> 被调用时，执行下面的操作步骤：</p>
+<ol>
+<li>如果 <code>this</code> 的值为 <code>undefined</code>，则返回 “[<code>object Undefined</code>]” .</li>
+<li>如果this的值为 <code>null</code> ,则返回 “[<code>object Null</code>]” .</li>
+<li>让O成为调用 <code>ToObject(this)</code> 的结果.</li>
+<li>让class成为O的内部属性 <code>[[Class]]</code> 的值.</li>
+<li>最后返回由 <code>&quot;[object &quot;</code> 和 <code>class</code> 和 <code>&quot;]&quot;</code> 三个部分组成的字符串.</li>
+</ol>
+<p>通过规范，了解调用 <code>Object.prototype.toString</code> 最终会返回一个由 <code>&quot;[object &quot;</code> 和 <code>class</code> 和 <code>&quot;]&quot;</code> 组成的字符串，而 <code>class</code> 是要判断的对象的内部属性。</p>
+<blockquote>
+<p>为了每个对象都能通过 <code>Object.prototype.toString()</code> 来检测，需要以 <code>Function.prototype.call()</code> 或者 <code>Function.prototype.apply()</code> 的形式来调用，传递要检查的对象作为第一个参数，称为<code>thisArg</code>。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="number">3</span>)) <span class="comment">// [object Number]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])) <span class="comment">// [object Array]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;)) <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>)) <span class="comment">// [object Null]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(date)) <span class="comment">// [object Date]</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>这个 class 值就是识别对象类型的关键<br>因此可以用 <code>Object.prototype.toString</code> 方法识别出更多类型<br>那到底能识别多少种类型呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = <span class="number">1</span>;          <span class="comment">// [object Number]</span></span><br><span class="line"><span class="keyword">var</span> string = <span class="string">'123'</span>;      <span class="comment">// [object String]</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>;      <span class="comment">// [object Boolean]</span></span><br><span class="line"><span class="keyword">var</span> unde = <span class="literal">undefined</span>;     <span class="comment">// [object Undefined]</span></span><br><span class="line"><span class="keyword">var</span> nul = <span class="literal">null</span>;          <span class="comment">// [object Null]</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;         <span class="comment">// [object Object]</span></span><br><span class="line"><span class="keyword">var</span> array = [];   <span class="comment">// [object Array]</span></span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();   <span class="comment">// [object Date]</span></span><br><span class="line"><span class="keyword">var</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(); <span class="comment">// [object Error]</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/a/g</span>;          <span class="comment">// [object RegExp]</span></span><br><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// [object Function]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTypes</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">arguments</span>[i]))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkTypes(number, string, bool, unde, nul, obj, array, date, error, reg, func)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.基本数据类型</span></span><br><span class="line">[object <span class="built_in">Number</span>]</span><br><span class="line">[object <span class="built_in">String</span>]</span><br><span class="line">[object <span class="built_in">Boolean</span>]</span><br><span class="line">[object Undefined]</span><br><span class="line">[object Null]</span><br><span class="line"><span class="comment">// 2.复杂数据类型</span></span><br><span class="line">[object <span class="built_in">Object</span>]</span><br><span class="line">[object <span class="built_in">Function</span>]</span><br><span class="line">[object <span class="built_in">Array</span>]</span><br><span class="line"></span><br><span class="line">[object <span class="built_in">Date</span>]</span><br><span class="line">[object <span class="built_in">Error</span>]</span><br><span class="line">[object <span class="built_in">RegExp</span>]</span><br></pre></td></tr></table></figure>
+<p>除了以上 11 种之外，还有3种：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Math</span>)); <span class="comment">// [object Math]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">JSON</span>)); <span class="comment">// [object JSON]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">arguments</span>)); </span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// [object Arguments]</span></span><br></pre></td></tr></table></figure>
+<p>这里看我们至少可以识别14 种类型，而[[class]] 属性数量至少有 12 个。</p>
+<p>利用这个方法写成的类库<a href="https://github.com/toddmotto/axis" target="_blank" rel="noopener">Axis.js</a>：</p>
+<p><a href="https://juejin.im/post/5cc293e0e51d456e3a5f0864#heading-2" target="_blank" rel="noopener">原理解析</a></p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor" target="_blank" rel="noopener">MDN文档</a></p>
+<blockquote>
+<p>返回创建实例对象的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" rel="noopener"><code>Object</code></a> 构造函数的引用。<br>注意，此属性的值是对函数本身的引用，而不是一个包含函数名称的字符串。</p>
+</blockquote>
+<p>如何判断一个变量是自定义对象类型？</p>
+<p>javascript 的所有对象都有一个 <code>constructor</code> 属性，这个属性可以帮我们判断 object 数据类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//alert(1.constructor); //报错 数字常量无 constructor 属性   </span></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(num.constructor == <span class="built_in">Number</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"miqilin"</span>.constructor == <span class="built_in">String</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"miqilin"</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(str.constructor == <span class="built_in">String</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="keyword">var</span> obj= <span class="literal">null</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor); <span class="comment">//报错，null 没有 constructor 属性   </span></span><br><span class="line"><span class="keyword">var</span> none = <span class="literal">undefined</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor); <span class="comment">//报错，undefined 没有 constructor 属性</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，数字型常量，<code>null</code> 和 <code>undefined</code> 都没有 <code>constructor</code> 属性。</p>
+<p>对于<strong>原型链继承</strong>的情况，<code>constuctor</code> 无法判断</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();   </span><br><span class="line">Cat.prototype.CatchMouse = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line"><span class="comment">//do some thing   </span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Cat();   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor == Cat); <span class="comment">//false ？？因为 Cat.prototype不在obj的原型链上   </span></span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor == Animal); <span class="comment">//true 理解</span></span><br></pre></td></tr></table></figure>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof" target="_blank" rel="noopener">MDN文档</a></p>
+<blockquote>
+<p>instanceof 运算符用于测试构造函数的 prototype 属性是否出现在对象的原型链中的任何位置</p>
+</blockquote>
+<p><code>instanceof</code> 运算符会告诉您对象是否是某种类型的实例， 这里所谓的“类型”其实就是构造函数。（可以用来判断）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();   </span><br><span class="line">Cat.prototype.CatchMouse = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line"><span class="comment">//do some thing   </span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Cat();   </span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> Cat); <span class="comment">//true 毫无疑问   </span></span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> Animal); <span class="comment">//true 可以理解</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>instanceof</code> 适用于所有原生类型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br><span class="line">/abc/ <span class="keyword">instanceof</span> <span class="built_in">RegExp</span> <span class="comment">// true</span></span><br><span class="line">(&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>instanceof</code> 不适用于原始类型：字符串，数字，布尔值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> <span class="keyword">instanceof</span> <span class="built_in">Boolean</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">'abc'</span> <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p><strong>typeof：</strong></p>
+<blockquote>
+<ul>
+<li>识别所有变量的类型，返回number，boolean，string，undefined，function，object（ <code>Null</code> 除外）</li>
+<li>对于内置的对象实例，只能返回”Object”字符串</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>Object.prototype.toString：</strong></p>
+<blockquote>
+<ul>
+<li>获取每个对象的类型，可以识别基本数据类型及内置对象类型</li>
+<li>不能识别自定义对象类型</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>instanceof：</strong></p>
+<blockquote>
+<ul>
+<li>判断对象的实例，返回布尔值</li>
+<li>不可判别基本数据类型</li>
+<li>可判别内置对象类型</li>
+<li>可判别自定义对象类型（可以判断原型链改变的情况）</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>constructor：</strong></p>
+<blockquote>
+<ul>
+<li>返回创建实例对象的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" rel="noopener"><code>Object</code></a> 构造函数的引用。</li>
+<li>可以判别部分基本数据类型（ <code>Undefined</code>/<code>Null</code> 除外）</li>
+<li>可识别内置对象类型</li>
+<li>可识别自定义对象类型（无法判断原型链改变的情况）</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="typeof和instanceof的区别"><a href="#typeof和instanceof的区别" class="headerlink" title="typeof和instanceof的区别"></a>typeof和instanceof的区别</h4><ul>
+<li><p><code>typeof</code> 识别所有变量的类型，返回值有number，boolean，string，undefined，function，object（不能判断null）</p>
+</li>
+<li><p><code>typeof</code> 对于丰富的对象实例，只能返回”Object”字符串。</p>
+</li>
+<li><p><code>instanceof</code> 用来判断对象，代码形式为 <code>obj1 instanceof obj2</code>（obj1是否是obj2的实例），其返回值为布尔值。obj2必须为对象，否则会报错！（所以不可以判别基本数据类型）。</p>
+</li>
+<li><p><code>instanceof</code> 可以对不同的对象实例进行判断，判断方法是根据对象的原型链依次向下查询，如果obj2的原型属性存在obj1的原型链上，（obj1 instanceof obj2）值为true。</p>
+</li>
+</ul>
+<h3 id="综合使用"><a href="#综合使用" class="headerlink" title="综合使用"></a>综合使用</h3><ul>
+<li><p><code>typeof</code> 判别基本数据类型（null除外）结合 <code>instanceof</code> 判别内置对象类型</p>
+</li>
+<li><p><code>Object.prototype.toString</code> 结合类库</p>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>参考文章：</p>
+<p><a href="https://juejin.im/post/5cc293e0e51d456e3a5f0864" target="_blank" rel="noopener">https://juejin.im/post/5cc293e0e51d456e3a5f0864</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+      <div>
+      
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin:100px 0 10px 0;">
+              ------------- 本文到此结束啦 <i class="fa fa-paw"></i> 感谢您的阅读 ♪(＾∀＾●)ﾉ -------------
+        </div>
+    
+</div>
+
+      
+      </div>
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/Hexo博客/hexo相关的实用插件/" rel="next" title="hexo相关的实用插件">
+                <i class="fa fa-chevron-left"></i> hexo相关的实用插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/前端/Vue/02-进阶/用Vue写后台：学习和使用笔记/" rel="prev" title="用Vue写后台：学习和使用笔记">
+                用Vue写后台：学习和使用笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+                <img class="site-author-image" itemprop="image" src="/images/user-icon.jpeg" alt="Cynthia">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">Cynthia</p>
+              <div class="site-description motion-element" itemprop="description">一个不会画画的设计不是一个好程序猿</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Cynthia0329" title="GitHub &rarr; https://github.com/Cynthia0329" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Cynthia0329@outlook.com" title="E-Mail &rarr; Cynthia0329@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-中的数据类型"><span class="nav-text">JS 中的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂数据类型（引用数据类型）"><span class="nav-text">复杂数据类型（引用数据类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型和引用数据类型的区别"><span class="nav-text">基本数据类型和引用数据类型的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与堆栈之间的联系"><span class="nav-text">与堆栈之间的联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体区别"><span class="nav-text">具体区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6-新增的数据类型"><span class="nav-text">ES6 新增的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-数据类型判断"><span class="nav-text">JS 数据类型判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString"><span class="nav-text">Object.prototype.toString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof和instanceof的区别"><span class="nav-text">typeof和instanceof的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综合使用"><span class="nav-text">综合使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cynthia</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"left","width":240,"height":300},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>

@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"right","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="🐰">
+<meta name="keywords" content="布局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sass使用总结（持续更新）">
+<meta property="og:url" content="http://yoursite.com/2018/09/06/前端/HTML和CSS/sass使用总结（持续更新）/index.html">
+<meta property="og:site_name" content="Cynthia&#39;s Blog">
+<meta property="og:description" content="🐰">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-28T09:16:25.301Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sass使用总结（持续更新）">
+<meta name="twitter:description" content="🐰">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/09/06/前端/HTML和CSS/sass使用总结（持续更新）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>sass使用总结（持续更新） | Cynthia's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<!-- 引入jQuery -->
+<script type="text/javascript" src="/lib/jquery/index.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 引入自定义js文件，实现分类折叠效果 -->
+<script type="text/javascript" src="/js/src/category.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cynthia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">鱼蛋的博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block index">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/前端/HTML和CSS/sass使用总结（持续更新）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cynthia">
+      <meta itemprop="description" content="一个不会画画的设计不是一个好程序猿">
+      <meta itemprop="image" content="/images/user-icon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cynthia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sass使用总结（持续更新）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-06 10:29:22" itemprop="dateCreated datePublished" datetime="2018-09-06T10:29:22+08:00">2018-09-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-28 17:16:25" itemprop="dateModified" datetime="2019-11-28T17:16:25+08:00">2019-11-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/HTML和CSS/" itemprop="url" rel="index"><span itemprop="name">HTML和CSS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/HTML和CSS/🐰未分类🐰/" itemprop="url" rel="index"><span itemprop="name">🐰未分类🐰</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>🐰</p>
+<a id="more"></a>
+<blockquote>
+<p>sass总文档：<a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a></p>
+</blockquote>
+<h2 id="优秀文章"><a href="#优秀文章" class="headerlink" title="优秀文章"></a>优秀文章</h2><h3 id="未分类"><a href="#未分类" class="headerlink" title="未分类"></a>未分类</h3><ul>
+<li><a href="https://github.com/tylergaw/tylergaw.com/blob/pre-postcss/src/css/scss/modules/_prefixed.scss" target="_blank" rel="noopener">自定义的Sass混合宏</a>来处理浏览器所需的私有前缀</li>
+</ul>
+<h3 id="Sass和compass"><a href="#Sass和compass" class="headerlink" title="Sass和compass"></a>Sass和compass</h3><ul>
+<li><a href="https://segmentfault.com/a/1190000008282901" target="_blank" rel="noopener">Sass &amp; Compass 初步使用</a></li>
+<li><a href="https://segmentfault.com/a/1190000013474614" target="_blank" rel="noopener">在Vue中使用Compass</a></li>
+<li><a href="https://www.imooc.com/learn/371" target="_blank" rel="noopener">慕课网课</a></li>
+</ul>
+<h3 id="sass目录结构组织"><a href="#sass目录结构组织" class="headerlink" title="sass目录结构组织"></a>sass目录结构组织</h3><ul>
+<li><a href="https://www.w3cplus.com/preprocessor/organize-your-sass-files.html" target="_blank" rel="noopener">组织你的Sass文件</a></li>
+<li><a href="https://www.w3cplus.com/preprocessor/look-different-sass-architectures.html" target="_blank" rel="noopener">流行框架的 Sass 体系结构解析</a></li>
+<li><a href="https://www.jianshu.com/p/18ac212eef60" target="_blank" rel="noopener">基于Sass的BootStrap4的源码目录结构-学习笔记</a></li>
+</ul>
+<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><h3 id="mixins"><a href="#mixins" class="headerlink" title="@mixins"></a>@mixins</h3><blockquote>
+<p>详细请看： <a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a> 第9章的内容</p>
+</blockquote>
+<h4 id="直接使用公共样式"><a href="#直接使用公共样式" class="headerlink" title="直接使用公共样式"></a>直接使用公共样式</h4><p>不带变量</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">mixin</span> right &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="需要自定义样式"><a href="#需要自定义样式" class="headerlink" title="需要自定义样式"></a>需要自定义样式</h4><ul>
+<li><p>带参数变量</p>
+  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文字超过xx行省略显示</span></span><br><span class="line">@<span class="keyword">mixin</span> ellipsis2(<span class="variable">$line</span>) &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">  -webkit-line-clamp: <span class="variable">$line</span>;</span><br><span class="line">  <span class="attribute">white-space</span>: normal;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">word-break</span>: keep-all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>带参数变量并设定默认值</p>
+  <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">mixin</span> button(<span class="variable">$background</span>: green) &#123; </span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1em</span>; </span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span> <span class="number">1.0em</span>; </span><br><span class="line">    <span class="attribute">text-decoration</span>: none; </span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>; </span><br><span class="line">    <span class="attribute">background</span>: <span class="variable">$background</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://raw.githubusercontent.com/Cynthia0329/images/master/img/20190506163656.png" target="_blank" rel="noopener">使用@content</a></p>
+<ul>
+<li>该方法可以新加入新的样式进去（跟使用@include后添加样式一样的效果）</li>
+<li>也可以写原本就有的样式，不同的值，覆盖原本的样式<ul>
+<li>这样编译出来的css代码不够优雅，谨慎使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="include"><a href="#include" class="headerlink" title="@include"></a>@include</h3><blockquote>
+<p>详细请看： <a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a> 9.2</p>
+</blockquote>
+<p>在用 <code>@mixin</code> 声明了公共样式后，用 <code>@include</code> 引用公共样式</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明</span></span><br><span class="line">@<span class="keyword">mixin</span> large-text &#123;</span><br><span class="line">  <span class="attribute">font</span>: &#123;</span><br><span class="line">    family: Arial;</span><br><span class="line">    size: <span class="number">20px</span>;</span><br><span class="line">    weight: bold;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#ff0000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.page-title</span> &#123;</span><br><span class="line">  @<span class="keyword">include</span> large-text;	<span class="comment">// 使用</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="extend"><a href="#extend" class="headerlink" title="@extend"></a>@extend</h3><blockquote>
+<p>详细请看：<a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a> 7.3</p>
+</blockquote>
+<p>sass 将一个选择器下的所有样式继承给另一个选择器</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.error</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> <span class="number">#f00</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fdd</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.seriousError</span> &#123;</span><br><span class="line">  @<span class="keyword">extend</span> .error;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">3px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h2><h3 id="循环语法"><a href="#循环语法" class="headerlink" title="循环语法"></a>循环语法</h3><blockquote>
+<p>这个-的命名方式可以借鉴</p>
+</blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">for</span> <span class="variable">$i</span> from 1 through 3 &#123;</span><br><span class="line">  <span class="selector-class">.item-</span>#&#123;<span class="variable">$i</span>&#125; &#123; <span class="attribute">width</span>: <span class="number">2em</span> * <span class="variable">$i</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-1</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">2em</span>; &#125;</span><br><span class="line"><span class="selector-class">.item-2</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">4em</span>; &#125;</span><br><span class="line"><span class="selector-class">.item-3</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">6em</span>; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量 $"></a>变量 $</h3><blockquote>
+<p>详情：<a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a>  6.2</p>
+</blockquote>
+<h3 id="变量定义-default"><a href="#变量定义-default" class="headerlink" title="变量定义 !default"></a>变量定义 !default</h3><blockquote>
+<p>详情：<a href="/2018/08/22/前端/HTML和CSS/doc/sass官方文档整理/" title="sass官方文档整理">sass官方文档整理</a>  6.9</p>
+</blockquote>
+<p>可以在变量的结尾添加 <code>!default</code> 给一个未通过 <code>!default</code> 声明赋值的变量赋值</p>
+<ul>
+<li><p>如果变量<strong>已经被赋值</strong>，不会再被重新赋值</p>
+</li>
+<li><p>如果变量<strong>还没有被赋值</strong>，则会被赋予新的值</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span>: <span class="string">"First content"</span>;</span><br><span class="line"><span class="variable">$content</span>: <span class="string">"Second content?"</span> !default;</span><br><span class="line"><span class="variable">$new_content</span>: <span class="string">"First time reference"</span> !default;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="variable">$content</span>;		<span class="comment">// 已经被赋值</span></span><br><span class="line">  new-<span class="attribute">content</span>: <span class="variable">$new_content</span>;	<span class="comment">//未被赋值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">"First content"</span>;			<span class="comment">// 为最初的值，没有发生改变</span></span><br><span class="line">  new-<span class="attribute">content</span>: <span class="string">"First time reference"</span>; &#125;	<span class="comment">// 新赋的值</span></span><br></pre></td></tr></table></figure>
+<p>变量是 null 空值时将视为未被 <code>!default</code> 赋值</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span>: null;</span><br><span class="line"><span class="variable">$content</span>: <span class="string">"Non-null content"</span> !default;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="variable">$content</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">"Non-null content"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="其他重点总结"><a href="#其他重点总结" class="headerlink" title="其他重点总结"></a>其他重点总结</h2><h3 id="amp-的妙用"><a href="#amp-的妙用" class="headerlink" title="&amp; 的妙用"></a>&amp; 的妙用</h3><p><code>&amp;</code> 必须作为选择器的第一个字符，<strong>其后可以跟随后缀生成复合的选择器</strong>，例如</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">  &amp;-sidebar &#123; <span class="attribute">border</span>: <span class="number">1px</span> solid; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black; &#125;</span><br><span class="line">  <span class="selector-id">#main-sidebar</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid; &#125;</span><br></pre></td></tr></table></figure>
+<p>当父选择器含有不合适的后缀时，Sass 将会报错。</p>
+<h3 id="属性嵌套"><a href="#属性嵌套" class="headerlink" title="属性嵌套"></a>属性嵌套</h3><blockquote>
+<p>可以了解，但是没有太大的必要…</p>
+</blockquote>
+<p>有些 CSS 属性遵循相同的命名空间 (namespace)，比如 <code>font-family, font-size, font-weight</code> 都以 <code>font</code> 作为属性的命名空间。</p>
+<p>为了便于管理这样的属性，同时也为了避免了重复输入，Sass 允许将属性嵌套在命名空间中，例如：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.funky</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>: &#123;</span><br><span class="line">    family: fantasy;</span><br><span class="line">    size: <span class="number">30em</span>;</span><br><span class="line">    weight: bold;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.funky</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: fantasy;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30em</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold; &#125;</span><br></pre></td></tr></table></figure>
+<p>命名空间也可以包含自己的属性值，例如：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.funky</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">20px</span>/<span class="number">24px</span> &#123;</span><br><span class="line">    family: fantasy;</span><br><span class="line">    weight: bold;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.funky</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">20px</span>/<span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: fantasy;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="符号代称"><a href="#符号代称" class="headerlink" title="符号代称"></a>符号代称</h3><ul>
+<li>@mixin ：可以用 <code>=</code> 表示</li>
+<li>@include ：可以用 <code>+</code> 表示</li>
+</ul>
+<h2 id="易混淆"><a href="#易混淆" class="headerlink" title="易混淆"></a>易混淆</h2><ul>
+<li><a href="https://www.cnblogs.com/yaoyao-sun/p/10813125.html" target="_blank" rel="noopener">sass中的占位符%，@extend，@mixin（@include）的编译区别和使用场景</a></li>
+<li><a href="https://blog.csdn.net/weixin_39987434/article/details/88419187" target="_blank" rel="noopener">Sass:@mixin和extend的选择</a></li>
+</ul>
+<h2 id="使用小demo"><a href="#使用小demo" class="headerlink" title="使用小demo"></a>使用小demo</h2><h3 id="变量相关"><a href="#变量相关" class="headerlink" title="变量相关"></a>变量相关</h3><h4 id="设置渐变主题色"><a href="#设置渐变主题色" class="headerlink" title="设置渐变主题色"></a>设置渐变主题色</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$--color-primary</span>: <span class="number">#409EFF</span> !default;</span><br><span class="line"><span class="variable">$--color-white</span>: <span class="number">#FFFFFF</span> !default;</span><br><span class="line"><span class="variable">$--color-primary-light-1</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">10%</span>) !default; <span class="comment">/* 53a8ff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-2</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">20%</span>) !default; <span class="comment">/* 66b1ff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-3</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">30%</span>) !default; <span class="comment">/* 79bbff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-4</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">40%</span>) !default; <span class="comment">/* 8cc5ff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-5</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">50%</span>) !default; <span class="comment">/* a0cfff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-6</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">60%</span>) !default; <span class="comment">/* b3d8ff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-7</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">70%</span>) !default; <span class="comment">/* c6e2ff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-8</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">80%</span>) !default; <span class="comment">/* d9ecff */</span></span><br><span class="line"><span class="variable">$--color-primary-light-9</span>: mix(<span class="variable">$--color-white</span>, <span class="variable">$--color-primary</span>, <span class="number">90%</span>) !default; <span class="comment">/* ecf5ff */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+      <div>
+      
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin:100px 0 10px 0;">
+              ------------- 本文到此结束啦 <i class="fa fa-paw"></i> 感谢您的阅读 ♪(＾∀＾●)ﾉ -------------
+        </div>
+    
+</div>
+
+      
+      </div>
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/布局/" <i class="fa fa-tag"> 布局</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/工具/前端工具/前端第三方插件（持续更新）/" rel="next" title="前端第三方插件（持续更新）">
+                <i class="fa fa-chevron-left"></i> 前端第三方插件（持续更新）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/前端/Vue/01-文档总结/Vue-Router使用总结（持续更新）/" rel="prev" title="Vue-Router使用总结（持续更新）">
+                Vue-Router使用总结（持续更新） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+                <img class="site-author-image" itemprop="image" src="/images/user-icon.jpeg" alt="Cynthia">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">Cynthia</p>
+              <div class="site-description motion-element" itemprop="description">一个不会画画的设计不是一个好程序猿</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Cynthia0329" title="GitHub &rarr; https://github.com/Cynthia0329" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Cynthia0329@outlook.com" title="E-Mail &rarr; Cynthia0329@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优秀文章"><span class="nav-text">优秀文章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未分类"><span class="nav-text">未分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sass和compass"><span class="nav-text">Sass和compass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sass目录结构组织"><span class="nav-text">sass目录结构组织</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用指令"><span class="nav-text">常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mixins"><span class="nav-text">@mixins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接使用公共样式"><span class="nav-text">直接使用公共样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要自定义样式"><span class="nav-text">需要自定义样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include"><span class="nav-text">@include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extend"><span class="nav-text">@extend</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用语法"><span class="nav-text">常用语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环语法"><span class="nav-text">循环语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-text">变量 $</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量定义-default"><span class="nav-text">变量定义 !default</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他重点总结"><span class="nav-text">其他重点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-的妙用"><span class="nav-text">&amp; 的妙用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性嵌套"><span class="nav-text">属性嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号代称"><span class="nav-text">符号代称</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#易混淆"><span class="nav-text">易混淆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用小demo"><span class="nav-text">使用小demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量相关"><span class="nav-text">变量相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置渐变主题色"><span class="nav-text">设置渐变主题色</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cynthia</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"left","width":240,"height":300},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>

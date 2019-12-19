@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"right","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="🐰总结实际应用中vue的一些小技巧">
+<meta name="keywords" content="编程，设计，动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue使用记录（持续更新）">
+<meta property="og:url" content="http://yoursite.com/2019/05/05/前端/Vue/Vue使用记录（持续更新）/index.html">
+<meta property="og:site_name" content="Cynthia&#39;s Blog">
+<meta property="og:description" content="🐰总结实际应用中vue的一些小技巧">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-12T09:22:21.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue使用记录（持续更新）">
+<meta name="twitter:description" content="🐰总结实际应用中vue的一些小技巧">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/05/前端/Vue/Vue使用记录（持续更新）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Vue使用记录（持续更新） | Cynthia's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<!-- 引入jQuery -->
+<script type="text/javascript" src="/lib/jquery/index.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 引入自定义js文件，实现分类折叠效果 -->
+<script type="text/javascript" src="/js/src/category.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cynthia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">鱼蛋的博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block index">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/前端/Vue/Vue使用记录（持续更新）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cynthia">
+      <meta itemprop="description" content="一个不会画画的设计不是一个好程序猿">
+      <meta itemprop="image" content="/images/user-icon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cynthia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue使用记录（持续更新）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-05 14:43:30" itemprop="dateCreated datePublished" datetime="2019-05-05T14:43:30+08:00">2019-05-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-12 17:22:21" itemprop="dateModified" datetime="2019-11-12T17:22:21+08:00">2019-11-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>🐰<br>总结实际应用中vue的一些小技巧<br><a id="more"></a></p>
+<h2 id="未分类"><a href="#未分类" class="headerlink" title="未分类"></a>未分类</h2><p>利用路由嵌套来实现【整个布局不改变，只改变主体内容】的效果<br><a href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/essentials/layout.html#layout" target="_blank" rel="noopener">链接</a></p>
+<p><strong>初始化时执行watch中的方法</strong></p>
+<p><a href="https://segmentfault.com/a/1190000019122005?_ea=10839074#articleHeader11" target="_blank" rel="noopener">详情</a></p>
+<p><strong>性能优化小技巧</strong></p>
+<p>能用<code>v-show</code>的地方就不要用<code>v-if</code>，善用<code>keep-alive</code>和<code>v-once</code>，<code>Object.freeze()</code>处理 <a href="https://github.com/vuejs/vue/issues/4384" target="_blank" rel="noopener">vue big data</a> 问题等</p>
+<h2 id="css样式相关"><a href="#css样式相关" class="headerlink" title="css样式相关"></a>css样式相关</h2><h3 id="未分类-1"><a href="#未分类-1" class="headerlink" title="未分类"></a>未分类</h3><ul>
+<li>可以<strong>利用 vue的 <code>computed()</code> 计算属性</strong> 来给 <code>:style:&quot;计算属性名字&quot;</code> 内联样式动态绑定一个css对象方法<ul>
+<li>因为计算属性得到的是 一个方法返回的值 可以在这个方法中根据不同的情况返回不同的值，达到动态绑定的效果</li>
+</ul>
+</li>
+</ul>
+<h3 id="深度选择器"><a href="#深度选择器" class="headerlink" title="深度选择器"></a>深度选择器</h3><blockquote>
+<p>当子组件使用了scope，但在父组件中又想修改子组件的样式时，可以使用深度选择器 <code>&gt;&gt;&gt;</code> 来实现</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;</span><br><span class="line"><span class="selector-class">.a</span> &gt;&gt;&gt; <span class="selector-class">.b</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>将会编译成</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span><span class="selector-attr">[data-v-f3f3eg9]</span> <span class="selector-class">.b</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以你想<strong>覆盖某个特定页面 <code>element</code> 的 button 的样式</strong>，你可以这样做：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.xxx-container</span> &gt;&gt;&gt; <span class="selector-class">.el-button</span>&#123;</span><br><span class="line">  xxxx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在scss等预处理器中 <code>&gt;&gt;&gt;</code> 可能不生效，可以使用 <code>/deep/</code> 代替</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang="scss" scoped&gt;</span><br><span class="line">/deep/ &#123;</span><br><span class="line">    <span class="comment">// 放你想修改的类样式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ssh:<a href="mailto://git@ops-gitlab.jrj.cn" target="_blank" rel="noopener">//git@ops-gitlab.jrj.cn</a>:62222/genius/broswer-web.git</p>
+<h2 id="动画相关"><a href="#动画相关" class="headerlink" title="动画相关"></a>动画相关</h2><ul>
+<li><strong>一个dom中同时显示和隐藏 存在两个动画</strong><ul>
+<li>参考 <code>Popup.vue</code> 组件中的处理方式：利用 <code>setTimeout()</code> 来使两个动画都能得以实现</li>
+</ul>
+</li>
+<li><strong>transition-group</strong> <ul>
+<li>与 <code>&lt;transition&gt;</code> 的不同：<code>&lt;transition-group&gt;</code> 会给里面遍历的每一个item都添加一个class动画类</li>
+<li><a href="https://cn.vuejs.org/v2/api/#transition-group" target="_blank" rel="noopener">api文档</a></li>
+<li><a href="https://cn.vuejs.org/v2/guide/transitions.html#%E5%88%97%E8%A1%A8%E8%BF%87%E6%B8%A1" target="_blank" rel="noopener">列表过渡教程</a></li>
+<li>具体应用案例：<a href="https://github.com/Cynthia0329/ebook/blob/master/src/components/shelf/ShelfList.vue" target="_blank" rel="noopener">ebook书架</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="DOM相关"><a href="#DOM相关" class="headerlink" title="DOM相关"></a>DOM相关</h2><p><a href="https://blog.csdn.net/changzhen11/article/details/84067816" target="_blank" rel="noopener">关于vue 的 this.$refs 打印为undefined解决办法</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果写在method中，那么可以使用 <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;) 等页面渲染好再调用</span><br></pre></td></tr></table></figure>
+<h2 id="表单相关"><a href="#表单相关" class="headerlink" title="表单相关"></a>表单相关</h2><p><a href="https://www.runoob.com/vue2/vue-forms.html" target="_blank" rel="noopener">Vue.js 表单 实例</a></p>
+<ul>
+<li><a href="https://www.cnblogs.com/yesyes/p/7299500.html" target="_blank" rel="noopener">vuejs使用FormData对象，ajax上传图片文件</a></li>
+</ul>
+<h2 id="数据相关"><a href="#数据相关" class="headerlink" title="数据相关"></a>数据相关</h2><h3 id="未分类-2"><a href="#未分类-2" class="headerlink" title="未分类"></a>未分类</h3><h3 id="修改对象或数组中的键，视图未发生变化"><a href="#修改对象或数组中的键，视图未发生变化" class="headerlink" title="修改对象或数组中的键，视图未发生变化"></a>修改对象或数组中的键，视图未发生变化</h3><h4 id="set"><a href="#set" class="headerlink" title="$set()"></a>$set()</h4><p>使用 <code>$set</code> 方法修改 <a href="https://cn.vuejs.org/v2/api/#Vue-set" target="_blank" rel="noopener">官方文档详情</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="undefined">    data() &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">        item: &#123;</span></span><br><span class="line"><span class="javascript">          title: <span class="string">'222'</span></span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="undefined">        options: [11, 22],</span></span><br><span class="line"><span class="undefined">        list: [</span></span><br><span class="line"><span class="undefined">          &#123;</span></span><br><span class="line"><span class="javascript">            title: <span class="string">'2222'</span></span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        ]</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    created() &#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 对于对象，第一个为要修改的对象，第二个参数为对象的键，第三个为要修改的键对应的值 */</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.item, 'title', '2200');</span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 对于对象，第一个为要修改的数组，第二个参数为数组索引，第三个为要修改的索引对应的值 */</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.options, 0, 33);</span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 对于数组里包含对象，可以利用循环对其进行修改 */</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.list.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$<span class="keyword">set</span>(item, '_disableExpand', true);</span></span><br><span class="line"><span class="undefined">      &#125;);</span></span><br><span class="line"><span class="javascript">      <span class="comment">/* 对于数组里包含对象，也可以利用Object.assign对其进行修改 */</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.list[<span class="number">0</span>] = <span class="built_in">Object</span>.assign(&#123;&#125;, <span class="keyword">this</span>.list[<span class="number">0</span>], &#123; <span class="attr">num</span>: <span class="number">10</span> &#125;);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.list, 0, this.list[0]);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="forceUpdata"><a href="#forceUpdata" class="headerlink" title="$forceUpdata()"></a>$forceUpdata()</h4><blockquote>
+<p>也可以直接进行修改后对页面进行强制刷新，使用 <code>$forceUpdate()</code> 方法</p>
+<p>迫使 Vue 实例重新渲染。注意它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.options[<span class="number">0</span>] = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">this</span>.$forceUpdate();</span><br></pre></td></tr></table></figure>
+<h3 id="vuex结合localStorage"><a href="#vuex结合localStorage" class="headerlink" title="vuex结合localStorage"></a>vuex结合localStorage</h3><blockquote>
+<p>合理运用vuex结合localstorage动态监听storage的变化</p>
+</blockquote>
+<p><strong>需求：</strong></p>
+<p>不同组件间共用同一数据，当一个组件将数据发生变化时，其他组件也可以响应该变化。</p>
+<p><strong>分析：</strong></p>
+<p>vue无法监听localstorage的变化。localstorage主要用于不同页面间传值，vue适合组件间传值。<br>对于组件间共用同一数据又想保存住信息或者再页面刷新的时候不丢失数据（vuex在页面刷新的时候存储的值会丢失，localstorage存储在本地浏览器中），可以采用vuex+localstorage的方式。</p>
+<p><strong>区别：</strong></p>
+<p>1.最重要的区别：vuex存储在内存，localstorage则以文件的方式存储在本地</p>
+<p>2.应用场景：vuex用于组件之间的传值，localstorage则主要用于不同页面之间的传值。</p>
+<p>3.永久性：当刷新页面时vuex存储的值会丢失，localstorage不会。</p>
+<p>注：很多同学觉得用localstorage可以代替vuex, 对于不变的数据确实可以，但是当两个组件共用一个数据源（对象或数组）时，如果其中一个组件改变了该数据源，希望另一个组件响应该变化时，localstorage无法做到，原因就是区别1。</p>
+<h2 id="指令相关"><a href="#指令相关" class="headerlink" title="指令相关"></a>指令相关</h2><ul>
+<li><a href="mailto:`@keyup.enter.exact" target="_blank" rel="noopener">`@keyup.enter.exact</a>=”search()” ` ：此处的 exact 表示只有按了 enter 键才会触发事件（不能组合按键）</li>
+</ul>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><h3 id="全局过滤器和本地过滤器"><a href="#全局过滤器和本地过滤器" class="headerlink" title="全局过滤器和本地过滤器"></a>全局过滤器和本地过滤器</h3><p><a href="https://cn.vuejs.org/v2/guide/filters.html" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局</span></span><br><span class="line">Vue.filter(<span class="string">'filterName'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据处理</span></span><br><span class="line">    <span class="keyword">return</span> ....</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 本地</span></span><br><span class="line">filters: &#123;</span><br><span class="line">    filterName: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 数据处理</span></span><br><span class="line">   		<span class="keyword">return</span> ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="格式化时间"><a href="#格式化时间" class="headerlink" title="格式化时间"></a>格式化时间</h3><p>利用插件<a href="http://momentjs.cn/" target="_blank" rel="noopener">Moment.js</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">    formDate: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!val) <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        <span class="keyword">return</span> moment(val, <span class="string">'YYYYMMDD'</span>).format(<span class="string">'YYYY-MM-DD'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="组件相关"><a href="#组件相关" class="headerlink" title="组件相关"></a>组件相关</h2><h3 id="未分类-3"><a href="#未分类-3" class="headerlink" title="未分类"></a>未分类</h3><ul>
+<li><p><strong>vue公共组件：使用 <code>插槽</code> 的标签来达到组件复用</strong> <a href="https://cn.vuejs.org/v2/guide/components-slots.html" target="_blank" rel="noopener">插槽</a></p>
+</li>
+<li><p><strong><code>:is</code> 点击不同的标签切换组件</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    data() &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">            tab: 传入已注册组件的名字	<span class="comment">// 可以点击标签修改tab的值达到切换组件</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果只有两个标签</span><br><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"currentTab === 1 ? content : bookmark"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">data() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">        currentTab: 1,</span></span><br><span class="line"><span class="undefined">        content: EbookSlideContents,</span></span><br><span class="line"><span class="undefined">        bookmark: EbookSlideBookmark</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="刷新当前组件"><a href="#刷新当前组件" class="headerlink" title="刷新当前组件"></a>刷新当前组件</h3><blockquote>
+<p>这个方法相比 <code>this.$router.go(0)</code> 而言不会出现白屏，用户体验比较好</p>
+</blockquote>
+<p>html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"isRouterAlive"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>method</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 刷新当前页面</span></span><br><span class="line">reloadPage() &#123;</span><br><span class="line">    <span class="keyword">this</span>.isRouterAlive = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isRouterAlive = <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="vue组件之间通信的方式"><a href="#vue组件之间通信的方式" class="headerlink" title="vue组件之间通信的方式"></a>vue组件之间通信的方式</h3><h4 id="props和-emit"><a href="#props和-emit" class="headerlink" title="props和$emit"></a>props和$emit</h4><p>父组件向子组件传递数据是通过prop传递的，子组件传递数据给父组件是通过$emit触发事件来做到的</p>
+<p>八种方式：<a href="https://blog.csdn.net/lyr190/article/details/88355949" target="_blank" rel="noopener">https://blog.csdn.net/lyr190/article/details/88355949</a></p>
+<h2 id="路由相关"><a href="#路由相关" class="headerlink" title="路由相关"></a>路由相关</h2><p><a href="https://www.baidu.com/link?url=CHPkW9IIYSIo9NttQ5q8JbuMeBKzx0yOeKDzDZHZIPvvBLvVs5evKothRlckXc0zhiM6oyrZihyMHn6mVKDrXK&amp;wd=&amp;eqid=9f682ced00031977000000065ceca628" target="_blank" rel="noopener"><em>vue 监听路由变化</em></a></p>
+<h2 id="可复用性-amp-组合"><a href="#可复用性-amp-组合" class="headerlink" title="可复用性 &amp; 组合"></a>可复用性 &amp; 组合</h2><h3 id="插件相关"><a href="#插件相关" class="headerlink" title="插件相关"></a>插件相关</h3><blockquote>
+<p>插件通常用来为 Vue 添加全局功能。</p>
+<p>官方文档：<a href="https://cn.vuejs.org/v2/guide/plugins.html" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/plugins.html</a></p>
+</blockquote>
+<p>插件的功能范围没有严格的限制——一般有下面几种：</p>
+<ol>
+<li>添加全局方法或者属性</li>
+<li>添加全局资源：指令/过滤器/过渡等</li>
+<li>通过全局混入来添加一些组件选项。如 <a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">vue-router</a></li>
+<li>添加 Vue 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现。</li>
+<li>一个库，提供自己的 API，同时提供上面提到的一个或多个功能。如 <a href="https://github.com/vuejs/vue-router" target="_blank" rel="noopener">vue-router</a></li>
+</ol>
+<h4 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    MyPlugin.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 1. 添加全局方法或属性</span></span><br><span class="line">      Vue.myGlobalMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 逻辑...</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 2. 添加全局资源</span></span><br><span class="line">      Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">        bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">          <span class="comment">// 逻辑...</span></span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 3. 注入组件选项</span></span><br><span class="line">      Vue.mixin(&#123;</span><br><span class="line">        created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="comment">// 逻辑...</span></span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 4. 添加实例方法</span></span><br><span class="line">      Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span> (<span class="params">methodOptions</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 逻辑...</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在main.js中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入文件</span></span><br><span class="line"><span class="keyword">import</span> MyPlugin <span class="keyword">from</span> <span class="string">'./utils/MyPlugin'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用插件</span></span><br><span class="line">Vue.use(MyPlugin)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+      <div>
+      
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin:100px 0 10px 0;">
+              ------------- 本文到此结束啦 <i class="fa fa-paw"></i> 感谢您的阅读 ♪(＾∀＾●)ﾉ -------------
+        </div>
+    
+</div>
+
+      
+      </div>
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/05/前端/HTML和CSS/iframe优缺点和使用总结（持续更新）/" rel="next" title="iframe优缺点和使用总结（持续更新）">
+                <i class="fa fa-chevron-left"></i> iframe优缺点和使用总结（持续更新）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/05/后台/Nginx知识点总结（持续更新）/" rel="prev" title="Nginx知识点总结（持续更新）">
+                Nginx知识点总结（持续更新） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+                <img class="site-author-image" itemprop="image" src="/images/user-icon.jpeg" alt="Cynthia">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">Cynthia</p>
+              <div class="site-description motion-element" itemprop="description">一个不会画画的设计不是一个好程序猿</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Cynthia0329" title="GitHub &rarr; https://github.com/Cynthia0329" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Cynthia0329@outlook.com" title="E-Mail &rarr; Cynthia0329@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#未分类"><span class="nav-text">未分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css样式相关"><span class="nav-text">css样式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未分类-1"><span class="nav-text">未分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度选择器"><span class="nav-text">深度选择器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画相关"><span class="nav-text">动画相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM相关"><span class="nav-text">DOM相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单相关"><span class="nav-text">表单相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据相关"><span class="nav-text">数据相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未分类-2"><span class="nav-text">未分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改对象或数组中的键，视图未发生变化"><span class="nav-text">修改对象或数组中的键，视图未发生变化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#set"><span class="nav-text">$set()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forceUpdata"><span class="nav-text">$forceUpdata()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex结合localStorage"><span class="nav-text">vuex结合localStorage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令相关"><span class="nav-text">指令相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器"><span class="nav-text">过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局过滤器和本地过滤器"><span class="nav-text">全局过滤器和本地过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化时间"><span class="nav-text">格式化时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件相关"><span class="nav-text">组件相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未分类-3"><span class="nav-text">未分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新当前组件"><span class="nav-text">刷新当前组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue组件之间通信的方式"><span class="nav-text">vue组件之间通信的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#props和-emit"><span class="nav-text">props和$emit</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由相关"><span class="nav-text">路由相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可复用性-amp-组合"><span class="nav-text">可复用性 &amp; 组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件相关"><span class="nav-text">插件相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开发插件"><span class="nav-text">开发插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用插件"><span class="nav-text">使用插件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cynthia</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"left","width":240,"height":300},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>
